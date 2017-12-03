@@ -31,4 +31,13 @@ defmodule AOCTest do
 
   test :part_2, do: captcha_test(@input, 950, :two)
 
+  test :ext_1 do
+    n = 7
+    half = div(n, 2) - 1
+    IO.inspect 1_000_000..9_999_999
+    |> Enum.map(&Integer.digits/1)
+    |> Enum.filter(fn(a) -> Enum.all?(a, fn(n) -> n != 0 end) end)
+    |> Enum.filter(fn(a) -> (AOC.captcha(a, 0) == 0) && (AOC.captcha(a, half) == 0) end)
+    |> Enum.count
+  end
 end

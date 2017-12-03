@@ -21,6 +21,7 @@ defmodule AOC.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:combination, "~> 0.0.3"}
     ]
   end
 end
