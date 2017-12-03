@@ -21,8 +21,7 @@ defmodule AOC.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:advent_of_code_helper, "~> 0.1.0"},
-      {:combination, "~> 0.0.3"}
+      {:advent_of_code_helper, "~> 0.1.0"}
     ]
   end
 end
