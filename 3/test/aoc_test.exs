@@ -5,7 +5,7 @@ defmodule AOCTest do
   @year 2017
   @day 3
   @part_one_expected 326
-  @part_two_expected nil
+  @part_two_expected 363010
 
   test "example part one 1" do
     assert AOC.solve(1, :one) == 0
@@ -28,27 +28,6 @@ defmodule AOCTest do
     assert AOC.solve(elem(Integer.parse(String.trim(input)), 0), :one) == @part_one_expected
   end
 
-  test "example part two 1" do
-    assert AOC.solve(1, :two) == 1
-  end
-
-  test "example part two 2" do
-    assert AOC.solve(2, :two) == 1
-  end
-
-  test "example part two 3" do
-    assert AOC.solve(3, :two) == 2
-  end
-
-  test "example part two 4" do
-    assert AOC.solve(4, :two) == 4
-  end
-
-  test "example part two 5" do
-    assert AOC.solve(5, :two) == 5
-  end
-
-  @tag :skip
   test "part two" do
     {:ok, input} = AdventOfCodeHelper.get_input(@year, @day)
     assert AOC.solve(elem(Integer.parse(String.trim(input)), 0), :two) == @part_two_expected
