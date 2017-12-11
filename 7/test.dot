@@ -1,0 +1,19 @@
+strict digraph {
+  pbga [label="pbga\n66"]
+  xhth [label="xhth\n57"]
+  ebii [label="ebii\n61"]
+  havc [label="havc\n66"]
+  ktlj [label="ktlj\n57"]
+  fwft [label="fwft\n72\n(243)"]
+  fwft -> {ktlj; cntj; xhth}
+  qoyq [label="qoyq\n66"]
+  padx [label="padx\n45\n(243)"]
+  padx -> {pbga; havc; qoyq}
+  tknk [label="tknk\n41\n()"]
+  tknk -> {ugml; padx; fwft}
+  jptl [label="jptl\n61"]
+  ugml [label="ugml\n68\n(251)"]
+  ugml -> {gyxo; ebii; jptl}
+  gyxo [label="gyxo\n61"]
+  cntj [label="cntj\n57"]
+}
