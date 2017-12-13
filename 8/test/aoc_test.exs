@@ -24,6 +24,6 @@ c inc -20 if c == 10
 
   test "part two" do
     {:ok, input} = AdventOfCodeHelper.get_input(@year, @day)
-    assert :mu == AOC.solve(input) |> elem(1)
+    assert 5443 == AOC.solve(input) |> elem(1)
   end
 end
