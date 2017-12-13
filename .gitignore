@@ -1,3 +1,4 @@
 */config/config.exs
 */.cache/
 .elixir_ls
+./config.exs
