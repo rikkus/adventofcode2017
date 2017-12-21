@@ -5,20 +5,24 @@ defmodule AOCTest do
 @test_input "
 " |> String.trim 
 
+  @year 2017
+  @day :mu
+
   @tag :skip
   test "example" do
-    assert 1 == 1
+    assert :mu == AOC.solve(@test_input, :one)
   end
 
   @tag :skip
-  @tag timeout: 6000000
   test "part one" do
-    assert 1 == 1
+    {:ok, input} = AdventOfCodeHelper.get_input(@year, @day)
+    assert :mu == AOC.solve(input)
   end
 
   @tag :skip
   @tag timeout: 6000000
   test "part two" do
-    assert 1 == 1
+    {:ok, input} = AdventOfCodeHelper.get_input(@year, @day)
+    assert :mu == AOC.solve(input) |> elem(1)
   end
 end
