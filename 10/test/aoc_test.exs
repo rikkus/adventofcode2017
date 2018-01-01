@@ -29,11 +29,10 @@ defmodule AOCTest do
     assert "4007ff" == AOC.encode([64, 7, 255])
   end
 
-  test "two as one" do
-    assert "" == AOC.solve(<<3, 4, 1, 5>>, :two)
-  end
+#  test "two as one" do
+#    assert "" == AOC.solve(<<3, 4, 1, 5>>, :two)
+#  end
 
-  @tag :skip
   test "empty" do
     assert "a2582a3a0e66e6e86e3812dcb672a272" == AOC.solve("", :two)
   end

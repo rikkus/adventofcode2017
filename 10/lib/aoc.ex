@@ -42,19 +42,14 @@ defmodule AOC do
   end
 
   def to_sparse_hash(lengths) do
-    numbers = 0..4 |> Enum.map(fn(n) -> n end)
+    numbers = 0..255 |> Enum.map(fn(n) -> n end)
     numbers_length = Enum.count(numbers)
     rounds = 64
 
     1..rounds |> Enum.reduce(
       %{list: numbers, pos: 0, skip: 0},
       fn (n, acc) ->
-        l = case n do
-          1 -> [3, 4, 1, 5]
-          _ -> lengths
-        end
-
-        twist(acc.list, numbers_length, l, acc.pos, acc.skip)
+        twist(acc.list, numbers_length, lengths, acc.pos, acc.skip)
       end
     )
   end
