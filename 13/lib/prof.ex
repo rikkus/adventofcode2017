@@ -4,7 +4,7 @@ defmodule Speedo do
   def prof do
     profile do
       {:ok, input} = AdventOfCodeHelper.get_input(2017, 13)
-      AOC.solve(input, :two)
+      AOC.start_trying_to_solve(input, :two)
     end
   end
 

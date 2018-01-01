@@ -1,6 +1,5 @@
 defmodule AOCTest do
   use ExUnit.Case
-  import ExProf.Macro
   doctest AOC
 
 @test_input "
@@ -24,18 +23,6 @@ defmodule AOCTest do
 
   test "part two" do
     {:ok, input} = AdventOfCodeHelper.get_input(@year, @day)
-  end
-
-  def prof do
-    profile do
-      {:ok, input} = AdventOfCodeHelper.get_input(@year, @day)
-      AOC.solve(input, :two)
-    end
-  end
-
-  def run do
-    records = prof
-    total_percent = Enum.reduce(records, 0.0, &(&1.percent + &2))
-    IO.inspect "total = #{total_percent}"
+    assert 3840052 == AOC.solve(input, :two)
   end
 end

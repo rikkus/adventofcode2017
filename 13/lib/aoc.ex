@@ -41,5 +41,10 @@ defmodule AOC do
     input = parse(input)
     Enum.find(0..999_999_999, fn(n) -> total_score(input, n) == 0 end)
   end
+  
+  def start_trying_to_solve(input, :two) do
+    input = parse(input)
+    Enum.find(0..99_999, fn(n) -> total_score(input, n) == 0 end)
+  end
 end
 
