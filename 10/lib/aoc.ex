@@ -1,57 +1,57 @@
 defmodule AOC do
+  @default_input Enum.to_list(0..255)
 
-  def twist(list, count, [length | lengths], pos, skip) do
-    IO.inspect({:twist, list, count, [length | lengths], pos, skip})
-    twist_internal(list, count, [length | lengths], pos, skip)
+  def hash(input, key, index, skip) do
+    input |> Enum.reduce({key, index, skip}, &knot/2)
   end
 
-  def twist_internal(list, count, [length | lengths], pos, skip) do
-    new_list = Enum.concat(list, list) |> Enum.reverse_slice(pos, length)
-
-    new_list = cond do
-      (pos + length) < count -> new_list |> Enum.take(count)
-      true -> Enum.concat(Enum.slice(new_list, count, pos), Enum.slice(new_list, pos, count - pos))
-    end
-
-    case lengths do
-      [] -> %{list: list, pos: pos, skip: skip}
-      _ -> twist_internal(new_list, count, lengths, rem(pos + length + skip, count), skip + 1)
-    end
+  def reverse({a, b}) do
+    b ++ a
   end
 
-  def lengths(input, :one) do
-    input |> String.trim |> String.split(",", trim: true) |> Enum.map(&String.to_integer/1)
+  def twist(key, index, length) do
+    {a, b} = key |> Enum.split(index)
+    {a, b} = b ++ a |> Enum.split(length)
+    {a, b} = Enum.reverse(a) ++ b |> Enum.split(length(key) - index)
+    b ++ a
   end
 
-  def lengths(input, :two) do
-    input |> String.trim |> String.to_charlist |> Enum.concat([17, 31, 73, 47, 23])
+  def knot(length, {key, index, skip}) do
+    key = twist(key, index, length)
+    {key, rem(index + length + skip, length(key)), skip + 1}
   end
 
-  def solve(input, :one) when is_binary(input) do
-    solve(%{list: 0..255, lengths: lengths(input, :one)}, :one)
-  end
-
-  def solve(input, :one) do
-    [a, b | _] = twist(input.list, Enum.count(input.list), input.lengths, 0, 0).list
+  def solve(input, key, :one) do
+    [a, b | _] = hash(input, key, 0, 0) |> elem(0)
     a * b
   end
 
-  def solve(input, :two) do
-    sparse_hash = input |> lengths(:two) |> to_sparse_hash |> Map.get(:list)
-    sparse_hash |> to_dense_hash |> encode
+  def solve(key, :one) do
+    solve(key |> String.split(",") |> Enum.map(&String.to_integer/1), @default_input, :one)
   end
 
-  def to_sparse_hash(lengths) do
-    numbers = 0..255 |> Enum.map(fn(n) -> n end)
-    numbers_length = Enum.count(numbers)
-    rounds = 64
+  def solve(key, :two) do
+    key
+    |> String.to_charlist
+    |> Enum.concat([17, 31, 73, 47, 23])
+    |> to_sparse_hash
+    |> elem(0)
+    |> to_dense_hash
+    |> encode
+  end
 
-    1..rounds |> Enum.reduce(
-      %{list: numbers, pos: 0, skip: 0},
-      fn (n, acc) ->
-        twist(acc.list, numbers_length, lengths, acc.pos, acc.skip)
-      end
+  def to_sparse_hash(key) do
+    1..64 |> Enum.reduce(
+      {@default_input, 0, 0},
+      fn (_, {input, index, skip}) -> hash(key, input, index, skip) end
     )
+  end
+
+  def to_hex(n) do
+    n
+    |> Integer.to_string(16)
+    |> String.pad_leading(2, "0")
+    |> String.downcase
   end
 
   def to_dense_hash(blocks) do
@@ -62,14 +62,7 @@ defmodule AOC do
 
   def encode(list) do
     list
-    |> Enum.map(
-      fn(n) ->
-        n
-        |> Integer.to_string(16)
-        |> String.pad_leading(2, "0")
-        |> String.downcase
-      end
-    )
+    |> Enum.map(&to_hex/1)
     |> Enum.join
   end
 

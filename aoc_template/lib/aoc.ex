@@ -1,4 +1,9 @@
 defmodule AOC do
-  # TODO: implement stuff 
+  def solve(input, :one) do
+    :error
+  end
+  def solve(input, :two) do
+    :error
+  end
 end
 
